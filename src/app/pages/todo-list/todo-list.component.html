@@ -1,12 +1,18 @@
-<div class="container altura-pantalla">
-    <section class="row altura-pantalla">
-        <article class="col-6 d-flex align-items-center">
+<div class="container altura-pantalla py-3">
+    <section class="text-center">
+        <h1>To Do List</h1>
+    </section>
+    <section class="row h-75">
+        <article class="col-6 d-flex flex-column justify-content-center align-items-center">
+            <h2 *ngIf="tareas.length === 0">No tienes tareas pendientes</h2>
+            <h2 *ngIf="tareas.length !== 0">Tus tareas:</h2>
             <ul>
                 <li (click)="completada()" [ngClass]="{'text-decoration-line-through': tarea}" *ngFor="let tar of tareas">{{tar}}</li>
             </ul>
         </article>
 
-        <article class="col-6 d-flex justify-content-center align-items-center">
+        <article class="col-6 d-flex flex-column justify-content-center align-items-center">
+            <h2>Escribe tu tarea.</h2>
             <form (submit)="agregarTarea($event)">
                 <input type="text" [(ngModel)]="tarea" [ngModelOptions]="{standalone: true}">
             </form>
