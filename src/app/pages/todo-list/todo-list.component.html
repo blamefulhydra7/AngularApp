@@ -1,0 +1,15 @@
+<div class="container altura-pantalla">
+    <section class="row altura-pantalla">
+        <article class="col-6 d-flex align-items-center">
+            <ul>
+                <li (click)="completada()" [ngClass]="{'text-decoration-line-through': tarea}" *ngFor="let tar of tareas">{{tar}}</li>
+            </ul>
+        </article>
+
+        <article class="col-6 d-flex justify-content-center align-items-center">
+            <form (submit)="agregarTarea($event)">
+                <input type="text" [(ngModel)]="tarea" [ngModelOptions]="{standalone: true}">
+            </form>
+        </article>
+    </section>
+</div>
