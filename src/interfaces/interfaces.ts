@@ -1,3 +1,5 @@
-export interface titulo {
-    nombre: string
+export interface Tarea {
+    TareaID: number,
+    Descripcion: string,
+    Completada?: boolean
 }

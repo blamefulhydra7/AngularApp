@@ -3,18 +3,18 @@
         <h1>To Do List</h1>
     </section>
     <section class="row h-75">
-        <article class="col-6 d-flex flex-column justify-content-center align-items-center">
+        <article class="col-sm-6 d-flex flex-column justify-content-center align-items-center">
             <h2 *ngIf="tareas.length === 0">No tienes tareas pendientes</h2>
             <h2 *ngIf="tareas.length !== 0">Tus tareas:</h2>
             <ul>
-                <li (click)="completada()" [ngClass]="{'text-decoration-line-through': tarea}" *ngFor="let tar of tareas">{{tar}}</li>
+                <li (click)="completada(tar)" [ngClass]="{'text-decoration-line-through': tar.Completada}" *ngFor="let tar of tareas">{{tar.Descripcion}}</li>
             </ul>
         </article>
 
-        <article class="col-6 d-flex flex-column justify-content-center align-items-center">
+        <article class="col-sm-6 d-flex flex-column justify-content-center align-items-center">
             <h2>Escribe tu tarea.</h2>
             <form (submit)="agregarTarea($event)">
-                <input type="text" [(ngModel)]="tarea" [ngModelOptions]="{standalone: true}">
+                <input type="text" [(ngModel)]="tarea.Descripcion" [ngModelOptions]="{standalone: true}">
             </form>
         </article>
     </section>
