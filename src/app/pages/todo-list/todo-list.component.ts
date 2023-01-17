@@ -11,7 +11,7 @@ export class TodoListComponent implements OnInit {
   tarea!: Tarea;
   tareas: Tarea[] = [];
   contador: number = 1;
-  
+
   ngOnInit(): void {
     this.tarea = {
       TareaID: this.contador,
@@ -23,13 +23,12 @@ export class TodoListComponent implements OnInit {
     event.preventDefault();
     this.tarea.Descripcion = this.tarea.Descripcion.trim();
 
-    if(this.tarea.Descripcion === '')
-    {
+    if (this.tarea.Descripcion === '') {
       Swal.fire('Cuidado', 'El campo de tarea está vacío', 'warning');
       return;
     }
 
-    this.tareas.push({TareaID: this.tarea.TareaID, Descripcion: this.tarea.Descripcion});
+    this.tareas.push({ ...this.tarea });
 
     this.contador += 1;
     this.tarea.TareaID = this.contador;

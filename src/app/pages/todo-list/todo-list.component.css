@@ -1,3 +1,7 @@
 .altura-pantalla {
     height: 100vh;
 }
+
+li {
+    cursor: pointer;
+}
