@@ -30,7 +30,11 @@ export class TodoListComponent implements OnInit {
       });
   }
 
-
+  /**
+   * @description Método para agregar la tarea nueva en la tabla de tareas de SQL Server.
+   * @param event 
+   * @returns 
+   */
   agregarTarea(event: Event): void {
     event.preventDefault();
     this.tarea.Descripcion = this.tarea.Descripcion.trim();
@@ -48,6 +52,10 @@ export class TodoListComponent implements OnInit {
 
   }
 
+  /**
+   * @description Método para marcar las tareas como completadas.
+   * @param {Tarea} tarea 
+   */
   completada(tarea: Tarea): void {
     tarea.Completada = !tarea.Completada;
   }

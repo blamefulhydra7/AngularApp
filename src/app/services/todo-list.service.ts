@@ -10,10 +10,17 @@ export class TodoListService {
 
   constructor() { }
 
+  /**
+   * @description Método para pedirle al back las tareas no completadas de SQL Server.
+   */
   getTareas(): Promise<Tarea[]> {
     return axios.get<[], Tarea[]>(endpoints.todoList.base());
   }
 
+  /**
+   * @description Método para mandar por body la nueva tarea al Back.
+   * @param {Tarea} tarea
+   */
   addTarea(tarea: Tarea): Promise<void> {
     return axios.post(endpoints.todoList.base(), { tarea });
   }
