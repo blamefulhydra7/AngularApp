@@ -1,5 +1,5 @@
 export interface Tarea {
-    TareaID: number,
+    TareaID?: number,
     Descripcion: string,
     Completada?: boolean
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Tarea } from 'src/interfaces/interfaces';
 import Swal from 'sweetalert2';
+
+import { TodoListService } from 'src/app/services/todo-list.service';
+import { Tarea } from 'src/interfaces/interfaces';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,27 +14,38 @@ export class TodoListComponent implements OnInit {
   tareas: Tarea[] = [];
   contador: number = 1;
 
+  constructor(private servicio: TodoListService) { }
+
   ngOnInit(): void {
     this.tarea = {
-      TareaID: this.contador,
       Descripcion: ''
     }
+
+    this.servicio.getTareas()
+      .then(tareas => {
+        this.tareas = tareas;
+      })
+      .catch(() => {
+        Swal.fire('Error', 'Error al obtener las tareas', 'error');
+      });
   }
+
 
   agregarTarea(event: Event): void {
     event.preventDefault();
     this.tarea.Descripcion = this.tarea.Descripcion.trim();
 
     if (this.tarea.Descripcion === '') {
-      Swal.fire('Cuidado', 'El campo de tarea está vacío', 'warning');
       return;
     }
 
-    this.tareas.push({ ...this.tarea });
+    this.servicio.addTarea(this.tarea)
+      .then(() => {
+        this.tareas.push({ ...this.tarea })
+        this.tarea.Descripcion = '';
+      })
+      .catch(() => Swal.fire('Error', 'Error al guardar la tarea', 'error'));
 
-    this.contador += 1;
-    this.tarea.TareaID = this.contador;
-    this.tarea.Descripcion = '';
   }
 
   completada(tarea: Tarea): void {
