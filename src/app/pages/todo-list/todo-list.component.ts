@@ -22,7 +22,7 @@ export class TodoListComponent implements OnInit {
     }
 
     this.servicio.getTareas()
-      .then(tareas => {
+      .then((tareas: Tarea[]) => {
         this.tareas = tareas;
       })
       .catch(() => {
@@ -44,8 +44,8 @@ export class TodoListComponent implements OnInit {
     }
 
     this.servicio.addTarea(this.tarea)
-      .then(() => {
-        this.tareas.push({ ...this.tarea })
+      .then(({ TareaID }) => {
+        this.tareas.push({ ...this.tarea, TareaID })
         this.tarea.Descripcion = '';
       })
       .catch(() => Swal.fire('Error', 'Error al guardar la tarea', 'error'));
@@ -58,5 +58,11 @@ export class TodoListComponent implements OnInit {
    */
   completada(tarea: Tarea): void {
     tarea.Completada = !tarea.Completada;
+
+    this.servicio.updateTarea(tarea)
+      .catch(() => {
+        tarea.Completada = !tarea.Completada;
+        Swal.fire('Error', 'Error al actualizar la tarea', 'error');
+      })
   }
 }

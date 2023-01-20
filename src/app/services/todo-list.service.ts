@@ -21,7 +21,16 @@ export class TodoListService {
    * @description Método para mandar por body la nueva tarea al Back.
    * @param {Tarea} tarea
    */
-  addTarea(tarea: Tarea): Promise<void> {
+  addTarea(tarea: Tarea): Promise<any> {
     return axios.post(endpoints.todoList.base(), { tarea });
+  }
+
+  /**
+   * @description Método para actualizar una tarea.
+   * @param {Tarea} tarea 
+   * @returns Promise<void>
+   */
+  updateTarea(tarea: Tarea): Promise<void> {
+    return axios.put(endpoints.todoList.base(), { tarea });
   }
 }
