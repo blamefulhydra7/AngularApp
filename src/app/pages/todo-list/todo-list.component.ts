@@ -3,6 +3,7 @@ import Swal from 'sweetalert2';
 
 import { TodoListService } from 'src/app/services/todo-list.service';
 import { Tarea } from 'src/interfaces/interfaces';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -14,7 +15,7 @@ export class TodoListComponent implements OnInit {
   tareas: Tarea[] = [];
   contador: number = 1;
 
-  constructor(private servicio: TodoListService) { }
+  constructor(private servicio: TodoListService, private socket: SocketService) { }
 
   ngOnInit(): void {
     this.tarea = {
@@ -28,6 +29,7 @@ export class TodoListComponent implements OnInit {
       .catch(() => {
         Swal.fire('Error', 'Error al obtener las tareas', 'error');
       });
+    
   }
 
   /**
