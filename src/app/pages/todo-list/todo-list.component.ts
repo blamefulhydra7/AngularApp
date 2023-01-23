@@ -15,7 +15,7 @@ export class TodoListComponent implements OnInit {
   tareas: Tarea[] = [];
   contador: number = 1;
 
-  constructor(private servicio: TodoListService, private socket: SocketService) { }
+  constructor(private servicio: TodoListService) { }
 
   ngOnInit(): void {
     this.tarea = {
@@ -29,7 +29,6 @@ export class TodoListComponent implements OnInit {
       .catch(() => {
         Swal.fire('Error', 'Error al obtener las tareas', 'error');
       });
-    
   }
 
   /**

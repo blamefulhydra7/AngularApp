@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ChatComponent } from './pages/chat/chat.component';
 import { TodoListComponent } from './pages/todo-list/todo-list.component';
 
 const routes: Routes = [
@@ -8,8 +9,12 @@ const routes: Routes = [
     component: TodoListComponent
   },
   {
+    path: 'chat',
+    component: ChatComponent
+  },
+  {
     path: '**',
-    redirectTo: 'todo-list'
+    redirectTo: 'chat'
   }
 ];
 
