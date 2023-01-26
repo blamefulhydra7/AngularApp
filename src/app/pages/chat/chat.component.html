@@ -6,12 +6,33 @@
         </article>
     </section>
 
-    <section>
+    <section *ngIf="loggeado">
         <article class="chat-mensajes list-group">
-            <li class="list-group-item">Leonardo: Mensaje!!</li>
+            <li class="list-group-item" *ngFor="let msg of mensajes">{{msg.remitente}}: {{msg.msg}}</li>
         </article>
         <form (ngSubmit)="enviar()">
-            <input type="text" class="form-control mt-3" placeholder="Mensaje..." autofocus autocomplete="off">
+            <input type="text" class="form-control mt-3" placeholder="Mensaje..." autofocus autocomplete="off"
+                [(ngModel)]="mensaje" [ngModelOptions]="{standalone: true}">
         </form>
+    </section>
+
+    <section *ngIf="!loggeado">
+        <article>
+            <h3>Inicia sesión</h3>
+        </article>
+
+        <article>
+            <form (ngSubmit)="logIn()" class="form-group">
+                <label for="username" class="form-label mt-3">Nombre de usuario:</label>
+                <input type="text" id="username" class="form-control shadow" placeholder="Nombre de usuario..." autofocus
+                    autocomplete="off" [(ngModel)]="usuario" [ngModelOptions]="{standalone: true}">
+
+                <label for="salas" class="form-label mt-3">Sala:</label>
+                <select [(ngModel)]="sala" id="salas" class="form-select shadow" [ngModelOptions]="{standalone: true}">
+                    <option value="''" selected>Selecciona una sala</option>
+                    <option *ngFor="let sl of salas" [value]="sl">{{sl}}</option>
+                </select>
+            </form>
+        </article>
     </section>
 </div>
